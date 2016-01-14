@@ -38,8 +38,11 @@ int main(){
 				int sale;
 				cin >> price;
 				cin >> sale;
-				
-				data[j][sale] =  price;
+				if(data[j][sale] != 0){
+					data[j][sale] += price - sale;
+				}
+				else 
+					data[j][sale] =  price;
 			}
 		}
 	
@@ -49,9 +52,8 @@ int main(){
 	
 				int price = it->second;
 				int sale = it->first;
-				cout << price << ", " << sale;
-				if(i==0){
-					it->second += price;
+				if(it==data[i].begin()){
+					store[i] = price;
 					saleV[i] = sale;
 				}
 				else{
@@ -59,11 +61,11 @@ int main(){
 						saleV[i] = saleV[i] - price;
 					}else{
 						store[i] += price - saleV[i];
-						saleV[i] = 0;
+						saleV[i] = sale;
 					}
 				}
 				
-			}cout << endl;
+			}
 		}
 		int minIndex = 0;
 		int minPrice = store[0];
